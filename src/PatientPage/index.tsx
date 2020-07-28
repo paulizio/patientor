@@ -1,13 +1,13 @@
 import React from "react";
 import axios from "axios";
-import { Container, Table, Button,Icon } from "semantic-ui-react";
-import {Link,useParams } from "react-router-dom";
+import { Container,Icon } from "semantic-ui-react";
+import {useParams } from "react-router-dom";
 // import { PatientFormValues } from "../AddPatientModal/AddPatientForm";
 // import AddPatientModal from "../AddPatientModal";
 import { Patient } from "../types";
 import { apiBaseUrl } from "../constants";
 // import HealthRatingBar from "../components/HealthRatingBar";
-import { useStateValue } from "../state";
+import { useStateValue, particularPatient } from "../state";
 
 const PatientPage:React.FC=()=>{
     const { id } = useParams<{ id: string }>();
@@ -22,7 +22,7 @@ const PatientPage:React.FC=()=>{
             const { data: patientFromApi } = await axios.get<Patient>(
               `${apiBaseUrl}/patients/${id}`
             );
-            dispatch({ type: "PARTICULAR_PATIENT", payload: patientFromApi });
+            dispatch(particularPatient(patientFromApi))
           } catch (e) {
             console.error(e);
           }
