@@ -43,6 +43,27 @@ return(
     <h3>{patient.name}<Icon name={patient.gender==="female"?"venus":"mars"}/></h3> 
     <p>ssn: {patient.ssn}</p>
     <p>occupation: {patient.occupation}</p>
+    <h4>entries</h4>
+    {patient.entries.map((e,i)=>{
+      return(
+        <div>
+        <p key={i}>{e.date} {e.description}</p>
+        {patient.entries.map((x,l)=>{
+          return(
+            <div key={l}>
+          {x.diagnosisCodes?
+          <li key={l}>{x.diagnosisCodes.map(code=>
+          <li>{code}</li>
+          )}
+          </li>:null}
+          </div>
+        )
+        })
+      }
+        </div>
+      )}
+      )}
+
 </Container>
     </div>
 )
